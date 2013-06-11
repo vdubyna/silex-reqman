@@ -1,7 +1,10 @@
 Silex Reqman Application
 ======================
 
-TODO:
+[![Build Status](https://travis-ci.org/vdubyna/silex-reqman.png?branch=master)](https://travis-ci.org/vdubyna/silex-reqman)
+
+###TODO:
+
  * resolve 2 endpoints `index.html` for the web application and `api.php` for api calls.
  * add migration support [Migrations](https://github.com/KnpLabs/MigrationServiceProvider)
  * add builds support with travis
@@ -27,8 +30,6 @@ composer install
 jam install
 ```
 
-
-[![Build Status](https://travis-ci.org/makusu/silex-skeleton-rest.png?branch=master)](https://travis-ci.org/makusu/silex-skeleton-rest)
 
 Description
 -----------
