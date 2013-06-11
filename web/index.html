@@ -6,8 +6,10 @@
 <body>
 <script src="scripts/vendor/require.js"></script>
 <script>
-    require(['jquery'], function($){
+    require(['jquery', 'backbone', 'underscore'], function($, Backbone, _){
         console.log($);
+        console.log(Backbone);
+        console.log(_);
     });
 </script>
 </body>
