@@ -1,5 +1,32 @@
-Silex Skeleton ReSTful
+Silex Reqman Application
 ======================
+
+TODO:
+ * resolve 2 endpoints `index.html` for the web application and `api.php` for api calls.
+ * add migration support [Migrations](https://github.com/KnpLabs/MigrationServiceProvider)
+ * add builds support with travis
+ * add tests
+ * add Project Entity
+ * add Category Entity
+ * add Feature Entity
+ * add Test case Entity
+ * add README for installation of the project
+
+
+Install
+-------
+
+
+```bash
+# Install php environment
+composer install
+```
+
+```bash
+# Install web environment
+jam install
+```
+
 
 [![Build Status](https://travis-ci.org/makusu/silex-skeleton-rest.png?branch=master)](https://travis-ci.org/makusu/silex-skeleton-rest)
 
