@@ -9,12 +9,11 @@ env:
 
 before_install:
   - sudo apt-get install node
-  - npm install jam testem
+  - npm install -g jamjs testem
 before_script:
-  - ls node_modules
-  - ls node_modules/jam
-  - ls node_modules/jam/bin
-  - node_modules/jam/bin/jam.js install
+  - jam install
+  - "export DISPLAY=:99.0"
+  - "sh -e /etc/init.d/xvfb start"
   - composer install --dev
   - pyrus install --force phpunit/DbUnit
   - phpenv rehash
@@ -22,4 +21,6 @@ before_script:
   - mysql -e "CREATE TABLE IF NOT EXISTS todotestdb.item (id int(11) NOT NULL AUTO_INCREMENT, name varchar(255) NOT NULL, created datetime NOT NULL, PRIMARY KEY (id)) ENGINE=InnoDB DEFAULT CHARSET=utf8;" -uroot;
   - mysql -e "INSERT INTO todotestdb.item VALUES (null, 'Download silex-skeleton-rest.', '2013-01-01 00:00:00'), (null, 'Utilize the skeleton so I can use it for my project.', '2013-01-06 19:00:00');" -uroot;
 
-script: phpunit -c app/
+script:
+  - ./testem -l Firefox,PhantomJS
+  - phpunit -c app/
