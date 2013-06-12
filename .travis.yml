@@ -2,8 +2,7 @@ language: php
 
 php:
   - 5.3
-  - 5.4
-
+#  - 5.4 //run only with php5.3 to reduce the build time
 env:
   - DB=mysql
 
