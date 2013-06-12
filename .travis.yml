@@ -9,7 +9,7 @@ env:
 
 before_install:
   - sudo apt-get install node
-  - npm install jam testem
+  - npm install -g jam testem
 
 before_script:
   - jam install
