@@ -9,9 +9,8 @@ env:
 
 before_install:
   - sudo apt-get install node
-  - npm install -g jam testem
-
 before_script:
+  - npm install -g jam testem
   - jam install
   - composer install --dev
   - pyrus install --force phpunit/DbUnit
