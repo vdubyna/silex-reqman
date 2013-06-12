@@ -7,7 +7,12 @@ php:
 env:
   - DB=mysql
 
+before_install:
+  - sudo apt-get install node
+  - npm install jam testem
+
 before_script:
+  - jam install
   - composer install --dev
   - pyrus install --force phpunit/DbUnit
   - phpenv rehash
