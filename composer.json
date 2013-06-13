@@ -13,7 +13,9 @@
     "require": {
         "silex/silex": "1.0.*",
         "symfony/class-loader": "2.1.*",
-        "doctrine/dbal": "2.2.*"
+        "doctrine/dbal": "2.2.*",
+        "knplabs/migration-service-provider": "*",
+        "knplabs/console-service-provider": "*"
     },
     "require-dev":{
         "symfony/browser-kit"   : "2.1.*"
