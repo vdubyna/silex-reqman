@@ -3,22 +3,9 @@ Silex Reqman Application
 
 [![Build Status](https://travis-ci.org/vdubyna/silex-reqman.png?branch=master)](https://travis-ci.org/vdubyna/silex-reqman)
 
-###TODO:
-
- * resolve 2 endpoints `index.html` for the web application and `api.php` for api calls.
- * add migration support [Migrations](https://github.com/KnpLabs/MigrationServiceProvider)
- * add builds support with travis
- * add tests
- * add Project Entity
- * add Category Entity
- * add Feature Entity
- * add Test case Entity
- * add README for installation of the project
-
 
 Install
 -------
-
 
 ```bash
 # Install php environment
@@ -30,42 +17,14 @@ composer install
 jam install
 ```
 
-
-Description
------------
-This skeleton (you can also call it boilerplate now) is built using [Silex][2] for general [ReSTful (API)][6] purposes.
-
-Background
-----------
-The very reason that this code exists is because I was having a hard time finding a good EXAMPLE on utilizing Silex for real life usage.
-I need a maintainable and testable code that made especially for API.
-
-Of course there are many good slides and information out there, but most are just giving piece by piece explanation.
-
-I'm not a good reader. I need an EXAMPLE!
-
-FAQ
----
-"Dude, you can design silex however you want. That's the beauty of it."
-- "Yes, I know. But I want a nice, solid framework out of it."
-
-"Why don't you just use Symfony2 then?"
-- "Too much"
-(Don't miss understand me. I like Symfony2, I use it for some of my projects. But let's be honest, it's just too bulky sometimes.)
-
-"Is this code actually working?"
-- "Yeap. I use it for some smaller projects of mine. In fact, I use this more than Symfony2 I can say."
-
-"Enough chit-chat! Show me!"
-- "Here!"
-
 What you need to know
 ---------------------
  * [PHP][1]
  * [Silex][2]
  * [Doctrine][3]
  * [Composer][4]
- * [PHPUnit & DBUnit][5] (Optional)
+ * [Backbone][5]
+ * [PHPUnit & DBUnit][6] (Optional)
 
 Installation
 ------------
@@ -81,6 +40,9 @@ $ php composer.phar create-project makusu/silex-skeleton-rest
 ```
 
 You can add option "--dev" behind if you want to have the controller test working properly.
+
+Tests
+-----
 
 For this test, you need to put this sql command in MySQL.
 
@@ -157,15 +119,12 @@ Finally, for testing purposes, you can just run this command at your main direct
 $ phpunit -c app/
 ```
 
-Final
------
-Take your time and look around the code to understand more and do not hesitate to let me know if you have an idea how to improve this.
-
-You're ready to go! Enjoy!
+Resources
+---------
 
 [1]: http://php.net/
 [2]: http://silex.sensiolabs.org/
 [3]: http://www.doctrine-project.org/
 [4]: http://getcomposer.org/
-[5]: http://www.phpunit.de/
-[6]: http://en.wikipedia.org/wiki/Representational_state_transfer
+[5]: http://backbonejs.org/
+[6]: http://www.phpunit.de/
