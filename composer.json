@@ -1,13 +1,13 @@
 {
-    "name": "makusu/silex-skeleton-rest",
-    "description": "This skeleton / boilerplate is built using Silex for general ReSTful (API) purposes.",
-    "homepage": "http://github.com/makusu/silex-skeleton-rest",
+    "name": "vdubyna/reqman",
+    "description": "Application to manage requirements",
+    "homepage": "http://github.com/vdubyna/silex-reqman",
     "license": "MIT",
     "authors": [
         {
-            "name": "Max Meiden Dasuki",
-            "email": "max@meidendasuki.com",
-            "homepage": "http://www.maxmeidendasuki.com/"
+            "name": "Volodymyr Dubyna",
+            "email": "vovikha@gmail.com",
+            "homepage": "http://vdubyna.github.com/"
         }
     ],
     "require": {
@@ -18,8 +18,17 @@
         "knplabs/console-service-provider": "*"
     },
     "require-dev":{
-        "symfony/browser-kit"   : "2.1.*"
+        "symfony/browser-kit"   : "2.1.*",
+        "behat/behat": "*",
+        "behat/mink": "*",
+        "behat/mink-extension": "*",
+        "behat/mink-goutte-driver": "*",
+        "behat/mink-selenium2-driver": "*",
+        "behat/mink-browserkit-driver": "*"
     },
     "minimum-stability": "dev",
-    "version": "1.0.0"
+    "version": "1.0.0",
+    "config": {
+        "bin-dir": "bin/"
+    }
 }

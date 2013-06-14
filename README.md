@@ -34,6 +34,19 @@ composer install
 jam install
 ```
 
+Tests
+-----
+
+```bash
+#run selenium server to listen
+vendor\bin\behat
+```
+
+[Mink and Behat](http://docs.behat.org/cookbook/behat_and_mink.html)
+
+
+
+
 What you need to know
 ---------------------
  * [PHP][1]
