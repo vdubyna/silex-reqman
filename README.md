@@ -27,12 +27,31 @@ Install
 ```bash
 # Install php environment
 composer install
+# Apply migrations
+php app/console.php knp:migration:migrate
 ```
 
 ```bash
 # Install web environment
 jam install
 ```
+
+### Migrations
+
+To write a new db migration you have to do next
+
+ * Add file to folder `src/Resources/migration` 
+ * The name of the file should be named according to the next pattern `NUM_NAMEMigration.php`
+where `NUM` is an increment number 01, 02, 03 etc. `NAME` is a camel case name of migration.
+Example: `02_FeatureMigration.php`
+
+After add migration to the folder, you have to migrate.
+
+```bash
+php app/console.php knp:migration:migrate
+```
+
+ 
 
 Tests
 -----
