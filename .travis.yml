@@ -42,5 +42,5 @@ before_script:
 
 script:
   - testem ci -l Firefox
-  - ./vendor/bin/behat
+  - ./bin/behat
 #  - phpunit -c app/
