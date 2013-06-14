@@ -18,6 +18,9 @@ before_script:
   - sudo cat /etc/apache2/sites-available/default
   - echo "127.0.0.1 reqman.dev" | sudo tee -a /etc/hosts
   - sudo /etc/init.d/apache2 restart
+# Increase limit of api calls to composer
+  - "mkdir -p ~/.composer"
+  - cp .travis.composer.config.json ~/.composer/config.json
 #install packages
   - composer self-update
   - composer install --dev --prefer-dist
@@ -30,9 +33,6 @@ before_script:
   - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar"
   - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
   - sleep 5
-# Increase limit of api calls to composer
-  - "mkdir -p ~/.composer"
-  - cp .travis.composer.config.json ~/.composer/config.json
 
 #  temporary disable to check js test env
 #  - composer install --dev
