@@ -1,3 +1,4 @@
+@api
 Feature: Project
   In order to Manage projects
   As a Project user
@@ -7,19 +8,70 @@ Feature: Project
     When I send a GET request to "/project"
     Then the response code should be 200
     And response should contain json:
-    """
+      """
       [
           {
+              "id":  "1",
+              "project_id":  "project_1",
               "name":  "project 1",
               "description": "Description project 1"
           },
           {
+              "id":  "2",
+              "project_id":  "project_2",
               "name":  "project 2",
               "description": "Description project 2"
-          },
-          {
-              "name":   "project 3",
-              "description":  "Description project 3"
           }
       ]
       """
+
+  Scenario: Get project by unique name
+    When I send a GET request to "/project/project_1"
+    Then the response code should be 200
+    And response should contain json:
+      """
+      {
+          "id":  "1",
+          "project_id":  "project_1",
+          "name":  "project 1",
+          "description": "Description project 1"
+      }
+      """
+
+  Scenario: Add new project
+    When I send a POST request to "/project/" with values:
+      | project_id  | project_3             |
+      | name        | project 3             |
+      | description | Description project 3 |
+
+    Then the response code should be 200
+    And response should contain json:
+      """
+      {
+          "id":  "3",
+          "project_id":  "project_3",
+          "name":  "project 3",
+          "description": "Description project 3"
+      }
+      """
+  Scenario: Update project
+    When I send a PUT request to "/project/project_2" with values:
+      | name        | project 3             |
+      | description | Description project 3 |
+    Then the response code should be 200
+    And response should contain json:
+      """
+      {
+          "id":  "2",
+          "project_id":  "project_2",
+          "name":  "project 3",
+          "description": "Description project 3"
+      }
+      """
+  Scenario: Update project
+    When I send a DELETE request to "/project/project_2"
+    Then the response code should be 200
+    When I send a GET request to "/project/project_2"
+    And print response
+    Then the response code should be 200
+    And response should not contain "project_2"

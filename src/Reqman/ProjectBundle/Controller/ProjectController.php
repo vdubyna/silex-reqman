@@ -19,25 +19,38 @@ class ProjectController implements ControllerProviderInterface
      */
     public function connect(Application $app) {
 
-        $controller = new ControllerCollection(new Route());
+        /** @var ControllerCollection $controller */
+        $controller = $app['controllers_factory'];
 
-        $controller->get("/", function() use ($app) {
-            $results = '[
-          {
-              "name":  "project 1",
-              "description": "Description project 1"
-          },
-          {
-              "name":  "project 2",
-              "description": "Description project 2"
-          },
-          {
-              "name":   "project 3",
-              "description":  "Description project 3"
-          }
-      ]';
+        $dbAdapter = $app['db'];
 
-            return $results;
+        $controller->get("/", function() use ($app, $dbAdapter) {
+            return $app->json($dbAdapter->fetchAll("SELECT * FROM `project`"));
+        });
+
+        $controller->get("/{id}", function($id) use ($app, $dbAdapter) {
+            return $app->json($dbAdapter->fetchAssoc("SELECT * FROM `project` WHERE `project_id` = '{$id}'"));
+        });
+
+        $controller->post("/", function(Request $request) use ($app, $dbAdapter) {
+            $params = $request->request->all();
+            $dbAdapter->insert('project', $params);
+            $id = $params['project_id'];
+            $record = $dbAdapter->fetchAssoc("SELECT * FROM `project` WHERE `project_id` = '{$id}'");
+
+            return $app->json($record);
+        });
+
+        $controller->put("/{id}", function(Request $request, $id) use ($app, $dbAdapter) {
+            $params = $request->request->all();
+            $dbAdapter->update('project', $params, array('project_id' => $id));
+            $record = $dbAdapter->fetchAssoc("SELECT * FROM `project` WHERE `project_id` = '{$id}'");
+
+            return $app->json($record);
+        });
+
+        $controller->delete("/{id}", function($id) use ($app, $dbAdapter) {
+            return $app->json($dbAdapter->delete('project', array('project_id' => $id)));
         });
 
         return $controller;

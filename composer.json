@@ -27,7 +27,8 @@
         "behat/mink-browserkit-driver": "*",
         "behat/common-contexts": "*",
         "kriswallsmith/buzz": "*",
-        "phpunit/phpunit": "*"
+        "phpunit/phpunit": "*",
+        "phpunit/dbunit": "*"
     },
     "minimum-stability": "dev",
     "version": "1.0.0",
