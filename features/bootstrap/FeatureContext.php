@@ -8,10 +8,13 @@ use Behat\Gherkin\Node\PyStringNode,
     Behat\Gherkin\Node\TableNode;
 
 use Behat\MinkExtension\Context\MinkContext;
+use Behat\CommonContexts\WebApiContext;
 
-/**
- * Features context.
- */
-class FeatureContext extends MinkContext
+class FeatureContext extends BehatContext
 {
+    public function __construct(array $parameters)
+    {
+        $this->useContext('mink', new MinkContext);
+        $this->useContext('api', new WebApiContext($parameters['base_api_url']));
+    }
 }

@@ -6,7 +6,7 @@ use Symfony\Component\ClassLoader\UniversalClassLoader;
 
 $loader = new UniversalClassLoader();
 
-$loader->registerNamespace('Todo', __DIR__.'/../src');
+$loader->registerNamespace('Reqman', __DIR__.'/../src');
 
 $loader->register();
 

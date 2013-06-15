@@ -24,7 +24,10 @@
         "behat/mink-extension": "*",
         "behat/mink-goutte-driver": "*",
         "behat/mink-selenium2-driver": "*",
-        "behat/mink-browserkit-driver": "*"
+        "behat/mink-browserkit-driver": "*",
+        "behat/common-contexts": "*",
+        "kriswallsmith/buzz": "*",
+        "phpunit/phpunit": "*"
     },
     "minimum-stability": "dev",
     "version": "1.0.0",

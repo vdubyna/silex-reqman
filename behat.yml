@@ -1,6 +1,10 @@
 default:
-    extensions:
-        Behat\MinkExtension\Extension:
-            base_url: http://reqman.dev
-            goutte: ~
-            selenium2: ~
+  context:
+    class: FeatureContext
+    parameters:
+      base_api_url: http://reqman.dev/api.php
+  extensions:
+    Behat\MinkExtension\Extension:
+      base_url: http://reqman.dev
+      goutte: ~
+      selenium2: ~

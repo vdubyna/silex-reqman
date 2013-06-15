@@ -5,5 +5,5 @@ Feature: Home Page
 
   @mink:selenium2
   Scenario: Open home page
-    Given I am on "/"
+    Given I am on homepage
     Then I should see "Reqman Application"

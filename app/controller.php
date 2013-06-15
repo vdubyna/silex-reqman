@@ -1,7 +1,7 @@
 <?php
 
-$app->mount('/item', new Todo\TaskBundle\Controller\ItemController());
+$app->mount('/project', new Reqman\ProjectBundle\Controller\ProjectController());
 
 $app->get('/', function () {
-    return "Welcome To ReSTful API";
+    return "Welcome To Reqman API";
 });
