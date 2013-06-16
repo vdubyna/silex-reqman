@@ -17,7 +17,6 @@ class FeatureContext extends BehatContext
     {
         $this->useContext('mink', new MinkContext);
         $this->useContext('api', new WebApiContext($parameters['base_api_url']));
-        $this->useContext('doctrine_fixtures_context', new DoctrineFixturesContext());
     }
 
     private $databaseTester;
@@ -32,7 +31,7 @@ class FeatureContext extends BehatContext
 
     protected function getDataSet()
     {
-        $dataSet = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(dirname(__FILE__) . "/../api/fixtures/project.yml");
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(dirname(__FILE__) . "/../fixtures/project.yml");
 
         return $dataSet;
     }
