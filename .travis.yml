@@ -8,7 +8,6 @@ env:
 
 before_install:
   - sudo apt-get install node
-  - npm install -g jamjs testem
 before_script:
 # install apache and configure host
   - sudo apt-get update > /dev/null
@@ -24,6 +23,7 @@ before_script:
 #install packages
   - composer self-update
   - composer install --dev --prefer-dist
+  - cp app/api.php public/api.php
 # Apply migrations
   - mysql -e 'create database test_reqman;'
   - php app/console.php knp:migration:migrate
@@ -36,4 +36,3 @@ before_script:
   - sleep 5
 script:
   - ./bin/behat
-#  - phpunit -c app/
