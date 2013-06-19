@@ -33,7 +33,7 @@ php app/console.php knp:migration:migrate
 
 ```bash
 # Install web environment
-jam install
+grunt test
 ```
 
 ### Migrations
@@ -63,6 +63,7 @@ Tests
 
 [Mink and Behat](http://docs.behat.org/cookbook/behat_and_mink.html)
 
+[angular js](http://www.youtube.com/watch?v=i9MHigUZKEM)
 
 
 

@@ -34,5 +34,8 @@ before_script:
   - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar"
   - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
   - sleep 5
+#install web app
+  - npm install yo
 script:
   - ./bin/behat
+  - grunt --gruntfile web/Gruntfile.js test

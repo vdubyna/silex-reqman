@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('frontendApp', [])
+angular.module('reqmanApp', [])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
