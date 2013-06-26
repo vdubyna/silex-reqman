@@ -16,7 +16,18 @@ describe('Service: project', function () {
   });
 
   it('should return list of projects', function () {
-    expect(!!project).toBe(true);
+    expect(project.list().length).toBe(2);
+  });
+
+  it('should return project by project id', function () {
+      var id = 'project_1';
+      expect(project.getProject(id)).toEqual(
+          {
+              project_id: 'project_1',
+              name: "Project 1",
+              description: "Description"
+          }
+      );
   });
 
 });

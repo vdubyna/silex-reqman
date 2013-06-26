@@ -1,8 +1,12 @@
+.idea/
 composer.lock
 composer.phar
 app/phpunit.xml
 vendor/
-.idea/
-web/scripts/vendor
 bin/
+node_modules
+.tmp
+.sass-cache
+web/components
+
 

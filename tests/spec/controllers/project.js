@@ -1,17 +1,17 @@
 'use strict';
 
-describe('Controller: MainCtrl', function () {
+describe('Controller: ProjectCtrl', function () {
 
   // load the controller's module
-  beforeEach(module('reqmanApp'));
+  beforeEach(module('webApp'));
 
-  var MainCtrl,
+  var ProjectCtrl,
     scope;
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    MainCtrl = $controller('MainCtrl', {
+    ProjectCtrl = $controller('ProjectCtrl', {
       $scope: scope
     });
   }));
