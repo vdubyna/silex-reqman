@@ -16,7 +16,7 @@ describe('Controller: MainCtrl', function () {
     });
   }));
 
-  it('should attach a list of projects to the scope', function () {
-    expect(scope.projects.length).toBe(2);
+  it('should show navigation menu', function () {
+
   });
 });
