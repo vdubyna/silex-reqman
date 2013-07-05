@@ -21,66 +21,6 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     yeoman: yeomanConfig,
-    watch: {
-      coffee: {
-        files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
-        tasks: ['coffee:dist']
-      },
-      coffeeTest: {
-        files: ['tests/spec/{,*/}*.coffee'],
-        tasks: ['coffee:test']
-      },
-      compass: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-        tasks: ['compass']
-      },
-      livereload: {
-        files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
-          '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-        ],
-        tasks: ['livereload']
-      },
-      karma: {
-        files: ['tests/spec/**/*.js'],
-        tasks: ['karma:unit:run'] //NOTE the :run flag
-      }
-    },
-    connect: {
-      options: {
-        port: 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost'
-      },
-      livereload: {
-        options: {
-          middleware: function (connect) {
-            return [
-              lrSnippet,
-              mountFolder(connect, 'web/.tmp'),
-              mountFolder(connect, yeomanConfig.app)
-            ];
-          }
-        }
-      },
-      test: {
-        options: {
-          middleware: function (connect) {
-            return [
-              mountFolder(connect, 'web/.tmp'),
-              mountFolder(connect, 'tests')
-            ];
-          }
-        }
-      }
-    },
-    open: {
-      server: {
-        url: 'http://localhost:<%= connect.options.port %>'
-      }
-    },
     clean: {
       dist: {
         files: [
@@ -111,34 +51,10 @@ module.exports = function (grunt) {
         singleRun: true
       }
     },
-    coffee: {
-      dist: {
-        files: [
-          {
-            expand: true,
-            cwd: '<%= yeoman.app %>/scripts',
-            src: '{,*/}*.coffee',
-            dest: 'web/.tmp/scripts',
-            ext: '.js'
-          }
-        ]
-      },
-      test: {
-        files: [
-          {
-            expand: true,
-            cwd: 'tests/spec',
-            src: '{,*/}*.coffee',
-            dest: 'web/.tmp/spec',
-            ext: '.js'
-          }
-        ]
-      }
-    },
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
-        cssDir: 'web/.tmp/styles',
+        cssDir: ['web/.tmp/styles', 'web/styles'],
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',
         fontsDir: '<%= yeoman.app %>/styles/fonts',
@@ -214,7 +130,7 @@ module.exports = function (grunt) {
           {
             expand: true,
             cwd: '<%= yeoman.app %>',
-            src: ['*.html', 'views/*.html'],
+            src: ['*.html', 'views/*.html', 'views/project/*.html'],
             dest: '<%= yeoman.dist %>'
           }
         ]
@@ -280,23 +196,9 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.renameTask('regarde', 'watch');
-
-  grunt.registerTask('server', [
-    'clean:server',
-    'coffee:dist',
-    'compass:server',
-    'livereload-start',
-    'connect:livereload',
-    'open',
-    'watch'
-  ]);
-
   grunt.registerTask('test', [
     'clean:server',
-    'coffee',
     'compass',
-    'connect:test',
     'karma'
   ]);
 
@@ -304,7 +206,6 @@ module.exports = function (grunt) {
     'clean:dist',
     'jshint',
     'test',
-    'coffee',
     'compass:dist',
     'useminPrepare',
     'imagemin',
@@ -312,7 +213,6 @@ module.exports = function (grunt) {
     'htmlmin',
     'concat',
     'copy',
-    'cdnify',
     'ngmin',
     'uglify',
     'rev',

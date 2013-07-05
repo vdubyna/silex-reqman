@@ -1,3 +1,4 @@
 'use strict';
 
-angular.module('reqmanApp').controller('MainCtrl', function () {});
+angular.module('reqmanApp').controller('MainCtrl', function ($scope) {
+});

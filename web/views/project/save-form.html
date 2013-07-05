@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h3>Save Project</h3>
+</div>
+<ul class="modal-body">
+    <li>Project ID: <input type="text" ng-model="projectInfo.project_id" /></li>
+    <li>Project name: <input type="text" ng-model="projectInfo.name" /></li>
+    <li>Project description: <input type="text" ng-model="projectInfo.description" /></li>
+</ul>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="saveProject(projectInfo)">Save Project</button>
+</div>

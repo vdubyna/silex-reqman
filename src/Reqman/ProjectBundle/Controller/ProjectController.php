@@ -22,6 +22,7 @@ class ProjectController implements ControllerProviderInterface
         /** @var ControllerCollection $controller */
         $controller = $app['controllers_factory'];
 
+        /** @var \Doctrine\DBAL\Connection $dbAdapter */
         $dbAdapter = $app['db'];
 
         $controller->get("/", function() use ($app, $dbAdapter) {

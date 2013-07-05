@@ -1,3 +1,11 @@
-<ul>
-    <li ng-repeat="project in projects">{{ project.name }}: {{ project.description }}</li>
-</ul>
+<table class="table table-striped">
+    <tr ng-repeat="project in projects">
+        <td>{{ project.id }}</td>
+        <td>{{ project.project_id }}</td>
+        <td>{{ project.name }}</td>
+        <td>{{ project.description }}</td>
+        <td><button class="btn" type="button" ng-click="saveDialog(project)">Edit</button></td>
+        <td><button class="btn btn-danger" type="button" ng-click="deleteProject(project, $index)">Delete</button></td>
+    </tr>
+</table>
+<button class="btn btn-primary" ng-click="saveDialog()">Add Project</button>

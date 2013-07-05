@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('reqmanApp', ['ngResource'])
+angular.module('reqmanApp', ['ngResource', 'ui.bootstrap'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
