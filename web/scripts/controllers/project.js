@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('reqmanApp')
-  .controller('ProjectCtrl', function ($scope, project, $dialog) {
+  .controller('ProjectListCtrl', function ($scope, project, $dialog) {
     project.query().then(function(result) {
       $scope.projects = result.data;
     });
@@ -16,7 +16,7 @@ angular.module('reqmanApp')
 
     $scope.saveDialog = function (projectItem) {
       $dialog.dialog()
-        .open('views/project/save-form.html', function ($scope, dialog) {
+        .open('views/project/save.html', function ($scope, dialog) {
           if (projectItem) {
             //populate form
             project.get(projectItem.project_id).then(function(result){
@@ -39,7 +39,6 @@ angular.module('reqmanApp')
             return;
           }
 
-          console.log(projectItem);
           if (projectItem) {
             project.update(projectInfo).then(function(result) {
               projectItem.name = result.data.description;
@@ -52,4 +51,10 @@ angular.module('reqmanApp')
           }
         });
     };
+  })
+  .controller('ProjectViewCtrl', function ($scope, project, $routeParams) {
+
+    project.get($routeParams.projectId).then(function(result){
+      $scope.project = result.data;
+    });
   });

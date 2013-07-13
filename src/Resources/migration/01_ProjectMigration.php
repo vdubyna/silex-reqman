@@ -15,11 +15,11 @@ class ProjectMigration extends AbstractMigration
                'unsigned'      => true,
                'autoincrement' => true
             ));
-        $projectTable->addColumn('project_id', 'string');
+        $projectTable->addColumn('identifier', 'string');
         $projectTable->addColumn('name', 'string');
         $projectTable->addColumn('description', 'text');
         $projectTable->setPrimaryKey(array('id'));
-        $projectTable->addUniqueIndex(array('project_id'));
+        $projectTable->addUniqueIndex(array('identifier'));
     }
 
     public function getMigrationInfo()

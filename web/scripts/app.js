@@ -8,8 +8,12 @@ angular.module('reqmanApp', ['ui.bootstrap'])
         controller: 'MainCtrl'
       })
       .when('/project', {
-        templateUrl: 'views/project.html',
-        controller: 'ProjectCtrl'
+        templateUrl: 'views/project/list.html',
+        controller: 'ProjectListCtrl'
+      })
+      .when('/project/:projectId', {
+        templateUrl: 'views/project/view.html',
+        controller: 'ProjectViewCtrl'
       })
       .otherwise({
         redirectTo: '/'

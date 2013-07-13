@@ -15,7 +15,10 @@
         "symfony/class-loader": "2.1.*",
         "doctrine/dbal": "2.2.*",
         "knplabs/migration-service-provider": "*",
-        "knplabs/console-service-provider": "*"
+        "knplabs/console-service-provider": "*",
+        "guzzle/guzzle": "*",
+        "guzzle/silex-provider": "*",
+        "kbsali/redmine-api": "*"
     },
     "require-dev":{
         "symfony/browser-kit"   : "2.1.*",

@@ -44,12 +44,18 @@ To write a new db migration you have to do next
  * The name of the file should be named according to the next pattern `NUM_NAMEMigration.php`
 where `NUM` is an increment number 01, 02, 03 etc. `NAME` is a camel case name of migration.
 Example: `02_FeatureMigration.php`
+[Documentation](https://github.com/KnpLabs/MigrationServiceProvider)
 
 After add migration to the folder, you have to migrate.
 
 ```bash
 php app/console.php knp:migration:migrate
 ```
+
+### Redmine api
+
+How to use redmine api service see examples there
+[Redmine Api](https://github.com/kbsali/php-redmine-api)
 
  
 

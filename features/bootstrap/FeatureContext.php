@@ -23,15 +23,14 @@ class FeatureContext extends BehatContext
 
     public function getConnection()
     {
-        $database = 'imebase_test';
-        $pdo      = new \PDO('mysql:dbname=test_reqman;host=localhost', 'root', '');
+        $pdo = new \PDO('mysql:dbname=test_reqman;host=localhost', 'root', '');
 
-        return $this->createDefaultDBConnection($pdo, $database);
+        return $this->createDefaultDBConnection($pdo);
     }
 
     protected function getDataSet()
     {
-        $dataSet = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(dirname(__FILE__) . "/../fixtures/project.yml");
+        $dataSet = new \PHPUnit_Extensions_Database_DataSet_YamlDataSet(dirname(__FILE__) . "/../fixtures/data.yml");
 
         return $dataSet;
     }
@@ -41,7 +40,13 @@ class FeatureContext extends BehatContext
     public function before($event)
     {
         $this->databaseTester = null;
-        $this->getDatabaseTester()->setSetUpOperation($this->getSetUpOperation());
+
+        $setUpOperation = new PHPUnit_Extensions_Database_Operation_Composite(array(
+            new PHPUnit_Extensions_Database_Operation_MySQL55Truncate(true),
+            PHPUnit_Extensions_Database_Operation_Factory::INSERT()
+        ));
+
+        $this->getDatabaseTester()->setSetUpOperation($setUpOperation);
         $this->getDatabaseTester()->setDataSet($this->getDataSet());
         $this->getDatabaseTester()->onSetUp();
     }
@@ -50,7 +55,7 @@ class FeatureContext extends BehatContext
     /** @AfterScenario */
     public function after($event)
     {
-        $this->getDatabaseTester()->setTearDownOperation($this->getTearDownOperation());
+        $this->getDatabaseTester()->setTearDownOperation(PHPUnit_Extensions_Database_Operation_Factory::NONE());
         $this->getDatabaseTester()->setDataSet($this->getDataSet());
         $this->getDatabaseTester()->onTearDown();
 
@@ -73,16 +78,6 @@ class FeatureContext extends BehatContext
     protected function newDatabaseTester()
     {
         return new PHPUnit_Extensions_Database_DefaultTester($this->getConnection());
-    }
-
-    protected function getSetUpOperation()
-    {
-        return PHPUnit_Extensions_Database_Operation_Factory::CLEAN_INSERT();
-    }
-
-    protected function getTearDownOperation()
-    {
-        return PHPUnit_Extensions_Database_Operation_Factory::NONE();
     }
 
     protected function createDefaultDBConnection(PDO $connection, $schema = '')
