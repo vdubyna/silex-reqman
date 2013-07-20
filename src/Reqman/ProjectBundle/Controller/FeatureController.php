@@ -32,7 +32,7 @@ class FeatureController implements ControllerProviderInterface
         $controller->get("/{id}", function($id) use ($app, $dbAdapter) {
             $feature = $dbAdapter->fetchAssoc("SELECT * FROM `feature` WHERE `id` = '{$id}'");
             $statusCode = ($feature) ? 200 : 404;
-           return $app->json($feature, $statusCode);
+            return $app->json($feature, $statusCode);
         });
 
         $controller->post("/", function(Request $request) use ($app, $dbAdapter) {

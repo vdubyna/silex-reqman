@@ -34,6 +34,10 @@ before_script:
   - "wget http://selenium.googlecode.com/files/selenium-server-standalone-2.31.0.jar"
   - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
 # - sleep 5 no need to do that now
+# install ruby and compass
+  - sudo apt-get install ruby1.9.1
+  - gem update --system
+  - gem install compass
 #install web app
   - npm install
   - npm install bower

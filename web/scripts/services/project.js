@@ -7,11 +7,11 @@ angular.module('reqmanApp')
 
     return {
       query: function() {
-        return $http.get(url).
-          success(function(data) {
+        return $http.get(url)
+          .success(function(data) {
             return data;
-          }).
-          error(function(data) {
+          })
+          .error(function(data) {
             console.error(data);
           });
       },
