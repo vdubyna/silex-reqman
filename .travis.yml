@@ -35,6 +35,7 @@ before_script:
   - "java -jar selenium-server-standalone-2.31.0.jar > /dev/null &"
 # - sleep 5 no need to do that now
 #install web app
+  - npm install
   - npm install bower
   - npm install grunt
   - npm install grunt-cli
