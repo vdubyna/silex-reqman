@@ -1,6 +1,6 @@
 @api
 Feature: Feature
-  In order to Manage features
+  In order to Manage categories
   As a Reqman user
   I should be able to manage them
 
@@ -73,19 +73,3 @@ Feature: Feature
     Then the response code should be 200
     When I send a GET request to "/project/1/feature/2"
     Then the response code should be 404
-
-  @addFeatureToCategory
-  Scenario: Add new feature to category
-    When I send a POST request to "/project/1/feature/2/category" with values:
-      | category_id | 2 |
-    Then the response code should be 201
-    And response should contain json:
-    """
-      {
-          "id":  "2",
-          "project_id":  "1",
-          "name":  "feature 2",
-          "description": "Description feature 2",
-          "category_id": "2"
-      }
-      """
