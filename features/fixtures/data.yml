@@ -9,49 +9,36 @@ project:
     identifier: project_2
     name: project 2
     description: Description project 2
-feature:
+user_story:
   -
     id: 1
     project_id: 1
-    name: feature 1
-    description: Description feature 1
+    name: user-story-1
+    description: Description user-story 1
   -
     id: 2
     project_id: 1
-    name: feature 2
-    description: Description feature 2
-category:
+    name: user-story-2
+    description: Description user-story 2
+test_case:
   -
-    id: 1
-    project_id: 1
-    name: category 1
-    description: Description category 1
+    id:  1
+    user_story_id:  1
+    name:  test-case-1
+    description: Description test-case 1
   -
-    id: 2
-    project_id: 1
-    name: category 2
-    description: Description category 2
-category_to_feature:
-  -
-    id: 1
-    category_id: 1
-    feature_id: 1
-  -
-    id: 2
-    category_id: 1
-    feature_id: 2
-  -
-    id: 3
-    category_id: 2
-    feature_id: 1
+    id:  2
+    user_story_id:  1
+    name:  test-case-2
+    description: Description test-case 2
 step:
   -
-    id: 1
-    feature_id: 1
-    name: step 1
+    id:  1
+    test_case_id:  1
+    name:  step 1
     description: Description step 1
   -
-    id: 2
-    feature_id: 1
-    name: step 2
+    id:  2
+    test_case_id:  1
+    name:  step 2
     description: Description step 2

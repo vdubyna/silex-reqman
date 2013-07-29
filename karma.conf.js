@@ -6,8 +6,6 @@ basePath = '';
 
 // list of files / patterns to load in the browser
 files = [
-  JASMINE,
-  JASMINE_ADAPTER,
   'web/components/angular/angular.js',
   'web/components/angular-mocks/angular-mocks.js',
   'web/components/angular-bootstrap/ui-bootstrap.js',
@@ -15,6 +13,8 @@ files = [
   'web/scripts/**/*.js',
   'tests/spec/**/*.js'
 ];
+
+frameworks = ["jasmine"];
 
 // list of files to exclude
 exclude = [];
@@ -56,3 +56,5 @@ captureTimeout = 60000;
 // Continuous Integration mode
 // if true, it capture browsers, run tests and exit
 singleRun = false;
+
+reporters = ['spec'];

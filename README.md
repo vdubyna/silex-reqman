@@ -12,10 +12,10 @@ the `Reqman` with issues in the redmine. Also we plan to generate reports based 
 ### Main terms:
 
  * __Project__ is a group of requirements. And reports are stored in the context of project.
- * __Category__ is additional `tag` to group requirements.
- * __Feature__ is a structural cell of the requirements list.
- * __Test Case__ is a scenario for the `feature` which aims to test specific functionality of the application
- * __Step__ is a part of the `Test case` and could be shared between different features.
+ * __Feature__ is additional `tag` to group requirements.
+ * __User Story__ is a structural cell of the requirements list.
+ * __Test Case__ is a scenario for the `User Story` which aims to test specific functionality of the application
+ * __Step__ is a part of the `Test Case` and could be shared between different features.
 
 ### Functionality
  

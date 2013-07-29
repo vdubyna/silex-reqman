@@ -9,7 +9,7 @@ use Silex\ControllerProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 
-class StepController implements ControllerProviderInterface
+class UserStoryController implements ControllerProviderInterface
 {
     /**
      * Define routes
@@ -25,36 +25,36 @@ class StepController implements ControllerProviderInterface
         /** @var \Doctrine\DBAL\Connection $dbAdapter */
         $dbAdapter = $app['db'];
 
-        $controller->get("/", function($testCaseId) use ($app, $dbAdapter) {
-            return $app->json($dbAdapter->fetchAll("SELECT * FROM `step` WHERE `test_case_id` = {$testCaseId}"));
+        $controller->get("/", function($projectId) use ($app, $dbAdapter) {
+            return $app->json($dbAdapter->fetchAll("SELECT * FROM `user_story` WHERE `project_id` = '{$projectId}'"));
         });
 
         $controller->get("/{id}", function($id) use ($app, $dbAdapter) {
-            $step = $dbAdapter->fetchAssoc("SELECT * FROM `step` WHERE `id` = {$id}");
-            $statusCode = ($step) ? 200 : 404;
-           return $app->json($step, $statusCode);
+            $userStory = $dbAdapter->fetchAssoc("SELECT * FROM `user_story` WHERE `id` = '{$id}'");
+            $statusCode = ($userStory) ? 200 : 404;
+            return $app->json($userStory, $statusCode);
         });
 
-        $controller->post("/", function(Request $request, $testCaseId) use ($app, $dbAdapter) {
+        $controller->post("/", function(Request $request, $projectId) use ($app, $dbAdapter) {
             $params = $request->request->all();
-            $params['test_case_id'] = $testCaseId;
-            $dbAdapter->insert('step', $params);
+            $params['project_id'] = $projectId;
+            $dbAdapter->insert('user_story', $params);
             $id = $dbAdapter->lastInsertId();
-            $record = $dbAdapter->fetchAssoc("SELECT * FROM `step` WHERE `id` = {$id}");
+            $record = $dbAdapter->fetchAssoc("SELECT * FROM `user_story` WHERE `id` = '{$id}'");
 
             return $app->json($record, 201);
         });
 
         $controller->put("/{id}", function(Request $request, $id) use ($app, $dbAdapter) {
             $params = $request->request->all();
-            $dbAdapter->update('step', $params, array('id' => $id));
-            $record = $dbAdapter->fetchAssoc("SELECT * FROM `step` WHERE `id` = {$id}");
+            $dbAdapter->update('user_story', $params, array('id' => $id));
+            $record = $dbAdapter->fetchAssoc("SELECT * FROM `user_story` WHERE `id` = '{$id}'");
 
             return $app->json($record);
         });
 
         $controller->delete("/{id}", function($id) use ($app, $dbAdapter) {
-            return $app->json($dbAdapter->delete('step', array('id' => $id)));
+            return $app->json($dbAdapter->delete('user_story', array('id' => $id)));
         });
 
         return $controller;

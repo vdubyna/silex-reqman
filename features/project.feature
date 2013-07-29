@@ -1,4 +1,4 @@
-@api
+@api @project
 Feature: Project
   In order to Manage projects
   As a Project user

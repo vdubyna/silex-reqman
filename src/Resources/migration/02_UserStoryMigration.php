@@ -5,11 +5,11 @@ namespace Migration;
 use Knp\Migration\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
-class CategoryMigration extends AbstractMigration
+class UserStoryMigration extends AbstractMigration
 {
     public function schemaUp(Schema $schema)
     {
-        $table = $schema->createTable('category');
+        $table = $schema->createTable('user_story');
         $table->addColumn('id', 'integer',
             array(
                'unsigned'      => true,
@@ -22,13 +22,13 @@ class CategoryMigration extends AbstractMigration
         $table->addForeignKeyConstraint(
             $schema->getTable('project'),
             array('project_id'),
-            array('id')
+            array('id'),
+            array('onDelete' => 'CASCADE')
         );
-
     }
 
     public function getMigrationInfo()
     {
-        return 'Added category table';
+        return 'Add user_story table';
     }
 }

@@ -5,11 +5,11 @@ namespace Migration;
 use Knp\Migration\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
-class FeatureMigration extends AbstractMigration
+class StepMigration extends AbstractMigration
 {
     public function schemaUp(Schema $schema)
     {
-        $table = $schema->createTable('feature');
+        $table = $schema->createTable('step');
         $table->addColumn('id', 'integer',
             array(
                'unsigned'      => true,
@@ -17,11 +17,11 @@ class FeatureMigration extends AbstractMigration
             ));
         $table->addColumn('name', 'string');
         $table->addColumn('description', 'string');
-        $table->addColumn('project_id', 'integer', array('unsigned' => true));
+        $table->addColumn('test_case_id', 'integer', array('unsigned' => true));
         $table->setPrimaryKey(array('id'));
         $table->addForeignKeyConstraint(
-            $schema->getTable('project'),
-            array('project_id'),
+            $schema->getTable('test_case'),
+            array('test_case_id'),
             array('id'),
             array('onDelete' => 'CASCADE')
         );
@@ -29,6 +29,6 @@ class FeatureMigration extends AbstractMigration
 
     public function getMigrationInfo()
     {
-        return 'Added feature table';
+        return 'Add step table';
     }
 }
