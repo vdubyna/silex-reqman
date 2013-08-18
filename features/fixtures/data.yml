@@ -25,20 +25,25 @@ test_case:
     id:  1
     user_story_id:  1
     name:  test-case-1
-    description: Description test-case 1
+    state: passed
   -
     id:  2
     user_story_id:  1
     name:  test-case-2
-    description: Description test-case 2
+    state: failed
 step:
   -
     id:  1
     test_case_id:  1
-    name:  step 1
-    description: Description step 1
+    name:  step 1 given
+    type: given
   -
     id:  2
     test_case_id:  1
-    name:  step 2
-    description: Description step 2
+    name:  step 2 when
+    type: when
+  -
+    id:  3
+    test_case_id:  1
+    name:  step 3 then
+    type: then
