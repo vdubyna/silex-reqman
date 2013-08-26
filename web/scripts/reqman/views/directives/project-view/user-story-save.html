@@ -1,0 +1,17 @@
+<form name="userStoryForm">
+    <div class="control-group" ng-class="{error: userStoryForm.name.$invalid}">
+        <label>Name</label>
+        <input type="text" name="name" ng-model="userStory.name" required>
+          <span ng-show="userStoryForm.name.$error.required" class="help-inline">
+              Required</span>
+    </div>
+
+    <label>Description</label>
+    <textarea name="description" ng-model="userStory.description"></textarea>
+
+    <br>
+    <a href="" class="btn" ng-click="cancel()">Cancel</a>
+    <button ng-click="save(userStory)" ng-disabled="userStoryForm.$invalid"
+            class="btn btn-primary">Save
+    </button>
+</form>

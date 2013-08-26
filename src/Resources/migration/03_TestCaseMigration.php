@@ -16,7 +16,7 @@ class TestCaseMigration extends AbstractMigration
                'autoincrement' => true
             ));
         $table->addColumn('name', 'string');
-        $table->addColumn('description', 'string');
+        $table->addColumn('state', 'string');
         $table->addColumn('user_story_id', 'integer', array('unsigned' => true));
         $table->setPrimaryKey(array('id'));
         $table->addForeignKeyConstraint(

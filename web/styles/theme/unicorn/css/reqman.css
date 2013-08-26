@@ -1,0 +1,14 @@
+.accordion-heading .accordion-toggle {
+    padding: 0;
+}
+
+.widget-title .progress {
+    margin-bottom: 0;
+    float: right;
+    width: 100px;
+    height: 37px;
+}
+
+.accordion-inner {
+    padding: 0 0;
+}

@@ -16,7 +16,7 @@ class StepMigration extends AbstractMigration
                'autoincrement' => true
             ));
         $table->addColumn('name', 'string');
-        $table->addColumn('description', 'string');
+        $table->addColumn('type', 'string');
         $table->addColumn('test_case_id', 'integer', array('unsigned' => true));
         $table->setPrimaryKey(array('id'));
         $table->addForeignKeyConstraint(

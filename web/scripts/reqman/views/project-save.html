@@ -1,0 +1,24 @@
+<form name="projectForm">
+    <div class="control-group" ng-class="{error: projectForm.name.$invalid}">
+        <label>Name</label>
+        <input type="text" name="name" ng-model="project.name" required>
+          <span ng-show="projectForm.name.$error.required" class="help-inline">
+              Required</span>
+    </div>
+
+    <div class="control-group" ng-class="{error: projectForm.identifier.$invalid}">
+        <label>Identifier</label>
+        <input type="text" name="identifier" ng-model="project.identifier" required>
+          <span ng-show="projectForm.identifier.$error.required" class="help-inline">
+              Required</span>
+    </div>
+
+    <label>Description</label>
+    <textarea name="description" ng-model="project.description"></textarea>
+
+    <br>
+    <a href="#/" class="btn">Cancel</a>
+    <button ng-click="save()" ng-disabled="projectForm.$invalid"
+            class="btn btn-primary">Save
+    </button>
+</form>
