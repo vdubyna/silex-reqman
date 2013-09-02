@@ -17,8 +17,7 @@ the `Reqman` with issues in the redmine. Also we plan to generate reports based 
  * __Test Case__ is a scenario for the `User Story` which aims to test specific functionality of the application
  * __Step__ is a part of the `Test Case` and could be shared between different features.
 
-### Functionality
- 
+### Functionality 
 
 
 Install
