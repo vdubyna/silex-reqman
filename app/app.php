@@ -24,7 +24,7 @@ $app['redmine-api'] = $app->share(function () {
 });
 
 $app->mount('/project', new \Reqman\ProjectBundle\Controller\ProjectController());
-$app->mount('/project/{projectId}/issue', new \Reqman\ProjectBundle\Controller\IssueController());
+$app->mount('/project/{userStoryId}/issue', new \Reqman\ProjectBundle\Controller\IssueController());
 $app->mount('/project/{projectId}/user-story', new \Reqman\ProjectBundle\Controller\UserStoryController());
 $app->mount('/user-story/{userStoryId}/test-case', new \Reqman\ProjectBundle\Controller\TestCaseController());
 $app->mount('/test-case/{testCaseId}/step', new \Reqman\ProjectBundle\Controller\StepController());
