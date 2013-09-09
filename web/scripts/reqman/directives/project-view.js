@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('reqmanApp')
-  .directive("projectView", function (project) {
+  .directive("projectView", function (project, userStory) {
 
     return {
       templateUrl: 'scripts/reqman/views/directives/project-view.html',
@@ -10,115 +10,124 @@ angular.module('reqmanApp')
         projectId: "@"
       },
       controller: function ($scope) {
-        this.selectUserStory = function (userStoryId) {
-          $scope.userStoryId = userStoryId;
+        $scope.log = function (v) {
+          console.log(v);
         }
+
+        $scope.selectUserStory = function (userStoryId) {
+          $scope.userStory = userStory.get($scope.activeProject.id, userStoryId);
+        }
+
+        $scope.$watch('projectId', function (projectId) {
+          if (projectId) {
+            project.get(projectId).then(function (result) {
+              $scope.activeProject = result;
+              $scope.userStoryList = userStory.query(result.id);
+            });
+          }
+        });
+
+        $scope.$on("user_story_save", function () {
+          $scope.userStoryList = userStory.query($scope.activeProject.id);
+        });
+
+        $scope.$on("user_story_delete", function () {
+          $scope.userStoryList = userStory.query($scope.activeProject.id);
+          $scope.userStory = {};
+        });
+
+      }
+    }
+  })
+
+  .directive("testCaseList", function (testCase) {
+
+    return {
+      templateUrl: 'scripts/reqman/views/directives/project-view/test-case-list.html',
+      restrict: "A",
+      scope: {
+        userStoryId: "@"
       },
-      link: function (scope, element, attrs) {
-        attrs.$observe('projectId', function (projectId) {
-          scope.project = (projectId) ? project.get(projectId) : {};
+      controller: function ($scope) {
+        $scope.$watch('userStoryId', function (userStoryId) {
+          $scope.testCaseList = (userStoryId) ? testCase.query(userStoryId) : [];
+        });
+
+        $scope.$on("test_case_save", function () {
+          $scope.testCaseList = testCase.query($scope.userStoryId);
+        });
+        $scope.$on("test_case_delete", function () {
+          $scope.testCaseList = testCase.query($scope.userStoryId);
         });
       }
     }
   })
-  .directive("userStoryList", function (userStory, testCase) {
+
+  .directive("stepList", function (step) {
 
     return {
-      require: "^projectView",
-      templateUrl: "scripts/reqman/views/directives/project-view/user-story-list.html",
-      restrict: "A",
-      controller: function ($scope) {
-        $scope.$on("user_story_list_refresh", function() {
-          $scope.userStoryList = userStory.query($scope.projectId);
-        });
-      },
-      link: function (scope, element, attrs, projectView) {
-
-        scope.projectView = projectView;
-
-        scope.$watch('project', function (project) {
-          scope.userStoryList = (angular.isDefined(project) && angular.isDefined(project['id']))
-            ? userStory.query(project.id) : [];
-        });
-
-        scope.$watch('userStoryId', function (userStoryId) {
-          scope.testCaseList = (userStoryId) ? testCase.query(userStoryId) : [];
-        });
-      }
-    };
-  })
-  .directive("userStoryView", function (userStory) {
-
-    return {
-      templateUrl: "scripts/reqman/views/directives/project-view/user-story-view.html",
       restrict: "A",
       scope: {
-        userStoryId: "@",
-        projectId: "@"
+        testCaseId: "@"
       },
-      link: function (scope, element, attrs) {
-        attrs.$observe('userStoryId', function (userStoryId) {
-          scope.currentUserStory = (userStoryId) ? userStory.get(attrs.projectId, userStoryId) : {};
-
-        })
+      controller: function ($scope) {
+        $scope.$watch('testCaseId', function (testCaseId) {
+          step.query({test_case_id: testCaseId}).then(function (result) {
+            console.log(result);
+            $scope.stepList = result;
+          })
+        });
       }
-    };
+    }
   })
-  .directive("userStoryStatus", function (testCase, $filter) {
 
+  .directive("userStoryStatus", function (testCase, $filter) {
       return {
         restrict: "A",
         template: "<progress percent=\"status\"></progress>",
         scope: {
           userStoryId: "@"
         },
-        link: function (scope, element, attrs) {
-          scope.status = [];
-          attrs.$observe('userStoryId', function (userStoryId) {
-            if (!userStoryId) {
-              return;
-            }
-
+        controller: function ($scope) {
+          $scope.status = [];
+          $scope.$watch('userStoryId', function (userStoryId) {
             testCase.query(userStoryId).then(function (result) {
-              scope.status = (result.length > 0) ? $filter('userStoryState')(result) : [{value: 100, type: "warning"}];
-            })
-          })
+              $scope.status = (result.length > 0)
+                ? $filter('userStoryState')(result)
+                : [{value: 100, type: "warning"}];
+            });
+          });
         }
       };
     })
-  .directive('saveUserStoryDialog', function (userStory) {
+
+  .directive('saveUserStoryDialog', function (userStory, $rootScope) {
 
     return {
       restrict: "A",
+      scope: true,
       controller: function ($scope, $dialog) {
-
         $scope.saveUserStory = function (currentUserStory) {
           $dialog.dialog()
             .open('scripts/reqman/views/directives/project-view/user-story-save.html', function ($scope, dialog) {
-
               $scope.userStory = (currentUserStory) ? angular.copy(currentUserStory) : {};
-
               $scope.save = function (item) {
                 dialog.close(item);
               };
               $scope.cancel = function () {
                 dialog.close();
               }
-            })
-            .then(function (item) {
+            }).then(function (item) {
               if (!item) {
                 return false;
               }
-              item.project_id = $scope.projectId;
               if (item.id) {
-                userStory.update(item)
-                  .then(function () {
-                    $scope.$emit("user_story_list_refresh");
+                userStory.update(item).then(function () {
+                    $rootScope.$broadcast("user_story_save");
                   });
               } else {
-                userStory.save(item)
-                  .then(function () {
-                    $scope.$emit("user_story_list_refresh");
+                userStory.save(item).then(function () {
+                    $rootScope.$broadcast("user_story_save");
                   });
               }
             });
@@ -126,44 +135,85 @@ angular.module('reqmanApp')
       }
     }
   })
-  .directive('saveTestCaseDialog', function (testCase) {
 
+  .directive('saveTestCaseDialog', function (testCase, $rootScope) {
     return {
       restrict: "A",
       scope: true,
       controller: function ($scope, $dialog) {
-        $scope.saveTestCase = function (userStoryId) {
+        $scope.saveTestCase = function (currentTestCase) {
           $dialog.dialog()
             .open('scripts/reqman/views/directives/project-view/test-case-save.html', function ($scope, dialog) {
+              $scope.testCase = (currentTestCase) ? angular.copy(currentTestCase) : {};
               $scope.save = function (item) {
                 dialog.close(item);
               };
               $scope.cancel = function () {
                 dialog.close();
               }
-            })
-            .then(function (item) {
+            }).then(function (item) {
               if (!item) {
                 return false;
               }
-              item.user_story_id = userStoryId;
-              testCase.save(item);
+              if (item.id) {
+                testCase.update(item).then(function () {
+                  $rootScope.$broadcast("test_case_save");
+                });
+              } else {
+                testCase.save(item).then(function () {
+                  $rootScope.$broadcast("test_case_save");
+                });
+              }
             });
         }
       }
     }
   })
-  .directive('deleteUserStoryDialog', function (userStory) {
 
+  .directive('saveStepDialog', function (step, $rootScope) {
     return {
       restrict: "A",
       scope: true,
       controller: function ($scope, $dialog) {
-        $scope.deleteUserStory = function (projectId, userStoryId) {
+        $scope.saveStep = function (currentStep) {
+          $dialog.dialog()
+            .open('scripts/reqman/views/directives/project-view/step-save.html', function ($scope, dialog) {
+              $scope.step = (currentStep) ? angular.copy(currentStep) : {};
+              $scope.save = function (item) {
+                dialog.close(item);
+              };
+              $scope.cancel = function () {
+                dialog.close();
+              }
+            }).then(function (item) {
+              if (!item) {
+                return false;
+              }
+              if (item.id) {
+                step.update(item).then(function () {
+                  $rootScope.$broadcast("step_save");
+                });
+              } else {
+                step.save(item).then(function () {
+                  $rootScope.$broadcast("step_save");
+                });
+              }
+            });
+        }
+      }
+    }
+  })
+
+  .directive('deleteUserStoryDialog', function (userStory) {
+    return {
+      restrict: "A",
+      scope: true,
+      controller: function ($scope, $dialog) {
+        $scope.deleteUserStory = function (activeUserStory) {
 
           $dialog.messageBox(
               "Delete User Story",
-              "You will delete User Story: " + userStoryId,
+              "You will delete User Story: " + activeUserStory.name,
               [
                 {result:'cancel', label: 'Cancel'},
                 {result:'ok', label: 'OK', cssClass: 'btn-primary'}
@@ -172,13 +222,43 @@ angular.module('reqmanApp')
             .open()
             .then(function (result) {
               if (result == 'ok') {
-                userStory.delete(projectId, userStoryId)
+                userStory.delete(activeUserStory.project_id, activeUserStory.id)
                   .then(function (result) {
-                    $scope.$emit("user_story_list_refresh");
+                    $scope.$emit("user_story_delete");
                   });
               }
             });
         }
       }
     }
-  });
+  })
+
+  .directive('deleteTestCaseDialog', function (testCase, $rootScope) {
+    return {
+      restrict: "A",
+      scope: true,
+      controller: function ($scope, $dialog) {
+        $scope.deleteTestCase = function (activeTestCase) {
+          $dialog.messageBox(
+              "Delete User Story",
+              "You will delete Test Case: " + activeTestCase.name,
+              [
+                {result:'cancel', label: 'Cancel'},
+                {result:'ok', label: 'OK', cssClass: 'btn-primary'}
+              ]
+            )
+            .open()
+            .then(function (result) {
+              if (result == 'ok') {
+                testCase.delete(activeTestCase.user_story_id, activeTestCase.id)
+                  .then(function (result) {
+                    $rootScope.$broadcast("test_case_delete");
+                  });
+              }
+            });
+        }
+      }
+    }
+  })
+
+;

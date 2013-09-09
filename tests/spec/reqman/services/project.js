@@ -11,7 +11,14 @@ describe('Service: project', function () {
     project = _project_;
   }));
 
-  it('should do something', function () {
+  it('project is active', function () {
     expect(!!project).toBe(true);
+  });
+
+
+
+
+  it('test karma module', function () {
+    expect(true).toBe(true);
   });
 });

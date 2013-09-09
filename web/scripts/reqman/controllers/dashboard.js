@@ -7,9 +7,9 @@ angular.module('reqmanApp')
       console.log(v);
     }
   })
-  .controller('ProjectViewCtrl', function ($scope, $routeParams, project) {
+  .controller('ProjectViewCtrl', function ($scope, $routeParams) {
 
-    $scope.project = project.get($routeParams.projectId);
+    $scope.projectId = $routeParams.projectId;
 
   })
   .controller('ProjectNewCtrl', function ($scope, $location, project) {

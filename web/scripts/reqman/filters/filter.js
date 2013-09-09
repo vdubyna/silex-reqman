@@ -8,6 +8,7 @@ angular.module('reqmanApp')
       pending: 'warning'
     }
     return function (text) {
+      text = (text) ? text : 'pending';
       return map[text];
     }
   })
@@ -30,6 +31,7 @@ angular.module('reqmanApp')
       }
 
       testCases.forEach(function (testCase) {
+        testCase.state = (testCase.state) ? testCase.state : "pending";
         stats[testCase.state]++;
       });
 

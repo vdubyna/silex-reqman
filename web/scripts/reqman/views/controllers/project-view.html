@@ -1,8 +1,24 @@
 <div>
-    <div id="content">
-        <div id="content-header">
-            <h1>Project: {{ project.name }}</h1>
-        </div>
-        <project-view project-id="{{ project.id }}" />
+    <div id="header">
+        <h1><a href="">Reqman Admin</a></h1>
+        <a id="menu-trigger" href="#"><i class="glyphicon glyphicon-align-justify"></i></a>
     </div>
+    <div id="user-nav">
+        <ul class="btn-group">
+            <li>
+                <a href="/#/">
+                    <i class="glyphicon glyphicon-home"></i>
+                    <span>Home</span>
+                </a>
+            </li>
+            <li projects-menu></li>
+            <li>
+                <a href="/#/project/new">
+                    <i class="glyphicon glyphicon-plus-sign"></i>
+                    <span>Add project</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <project-view project-id="{{ projectId }}" />
 </div>

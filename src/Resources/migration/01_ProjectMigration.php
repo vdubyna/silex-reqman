@@ -17,7 +17,7 @@ class ProjectMigration extends AbstractMigration
             ));
         $projectTable->addColumn('identifier', 'string');
         $projectTable->addColumn('name', 'string');
-        $projectTable->addColumn('description', 'text');
+        $projectTable->addColumn('description', 'text', array('default' => null, 'notnull' => false));
         $projectTable->setPrimaryKey(array('id'));
         $projectTable->addUniqueIndex(array('identifier'));
     }

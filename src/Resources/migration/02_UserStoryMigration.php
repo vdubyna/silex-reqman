@@ -16,7 +16,7 @@ class UserStoryMigration extends AbstractMigration
                'autoincrement' => true
             ));
         $table->addColumn('name', 'string');
-        $table->addColumn('description', 'string');
+        $table->addColumn('description', 'text', array('default' => null, 'notnull' => false));
         $table->addColumn('project_id', 'integer', array('unsigned' => true));
         $table->setPrimaryKey(array('id'));
         $table->addForeignKeyConstraint(

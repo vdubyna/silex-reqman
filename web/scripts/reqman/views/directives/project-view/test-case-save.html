@@ -1,20 +1,29 @@
-Test Case Save
-<form name="userStoryForm">
-    <div class="control-group" ng-class="{error: userStoryForm.name.$invalid}">
-        <label>Name</label>
-        <input type="text" name="name" ng-model="testCase.name" required>
-          <span ng-show="userStoryForm.name.$error.required" class="help-inline">
-              Required</span>
+<div>
+    <div class="modal-header">Save Test Case</div>
+    <div class="modal-body">
+        <form name="testCaseForm" class="form-horizontal">
+            <div class="form-group" ng-class="{error: testCaseForm.name.$invalid}">
+                <label class="control-label">Name</label>
+                <div class="controls">
+                    <input type="text" name="name" class="form-control" ng-model="testCase.name" required>
+                    <span for="name" ng-show="testCaseForm.name.$dirty && testCaseForm.name.$error.required" class="help-inline">Field is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">State</label>
+                <div class="controls">
+                    <select name="state" ng-model="testCase.state">
+                        <option value="passed">passed</option>
+                        <option value="failed">failed</option>
+                    </select>
+                </div>
+            </div>
+        </form>
     </div>
-
-    <label>State</label>
-    <select name="state" ng-model="testCase.state">
-        <option value="passed">passed</option>
-        <option value="failed">failed</option>
-    </select>
-    <br>
-    <a href="" class="btn" ng-click="cancel()">Cancel</a>
-    <button ng-click="save(testCase)" ng-disabled="userStoryForm.$invalid"
-            class="btn btn-primary">Save
-    </button>
-</form>
+    <div class="modal-footer">
+        <button class="btn" ng-click="cancel()">Cancel</button>
+        <button ng-click="save(testCase)" ng-disabled="testCaseForm.$invalid"
+                class="btn btn-primary">Save
+        </button>
+    </div>
+</div>

@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('reqmanApp')
-  .factory('testCase', function ($http) {
+  .factory('step', function ($http) {
 
-    var url = '/api.php/user-story/';
+    var url = '/api.php/test-case/';
 
     return {
-      query: function(userStoryId) {
+      query: function(step) {
 
-        return $http.get(url+userStoryId+'/test-case/')
+        return $http.get(url+step.test_case_id+'/step/')
           .success(function(data) {
             return data;
           })
@@ -20,8 +20,8 @@ angular.module('reqmanApp')
           });
 
       },
-      get: function(userStoryId, id) {
-        return $http.get(url+userStoryId+'/test-case/'+id).
+      get: function(step) {
+        return $http.get(url+step.test_case_id+'/step/'+step.id).
           success(function(data) {
             return data;
           }).
@@ -32,8 +32,8 @@ angular.module('reqmanApp')
             return result.data;
           });
       },
-      delete: function(userStoryId, id) {
-        return $http.delete(url+userStoryId+'/test-case/'+id).
+      delete: function(step, id) {
+        return $http.delete(url+step.test_case_id+'/step/'+step.id).
           success(function(data) {
             return data;
           }).
@@ -41,8 +41,8 @@ angular.module('reqmanApp')
             console.error(data);
           });
       },
-      update: function(info) {
-        return $http.put(url+info.userStoryId+'/test-case/' + info.id, info,
+      update: function(step) {
+        return $http.put(url+step.test_case_id+'/step/' + step.id, step,
             {
               headers: {'Content-Type': 'application/x-www-form-urlencoded'},
               transformRequest: function(obj) {
@@ -59,8 +59,8 @@ angular.module('reqmanApp')
             console.error(data);
           });
       },
-      save: function(info) {
-        return $http.post(url+info.user_story_id+'/test-case/', info,
+      save: function(step) {
+        return $http.post(url+step.test_case_id+'/step/', step,
           {
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             transformRequest: function(obj) {

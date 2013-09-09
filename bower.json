@@ -8,8 +8,7 @@
     "angular-cookies": "~1.0.5",
     "angular-sanitize": "~1.0.5",
     "angular-bootstrap": "*",
-    "restangular": "*",
-    "underscore": "*"
+    "requirejs": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.5",

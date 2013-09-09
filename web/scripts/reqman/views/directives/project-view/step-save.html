@@ -1,0 +1,30 @@
+<div>
+    <div class="modal-header">Save Step</div>
+    <div class="modal-body">
+        <form name="stepForm" class="form-horizontal">
+            <div class="form-group" ng-class="{error: stepForm.name.$invalid}">
+                <label class="control-label">Name</label>
+                <div class="controls">
+                    <input type="text" name="name" class="form-control" ng-model="step.name" required>
+                    <span for="name" ng-show="stepForm.name.$dirty && stepForm.name.$error.required" class="help-inline">Field is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Step type</label>
+                <div class="controls">
+                    <select name="state" ng-model="step.type">
+                        <option value="given">given</option>
+                        <option value="when">when</option>
+                        <option value="then">then</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" ng-click="cancel()">Cancel</button>
+        <button ng-click="save(step)" ng-disabled="stepForm.$invalid"
+                class="btn btn-primary">Save
+        </button>
+    </div>
+</div>
