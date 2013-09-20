@@ -1,0 +1,26 @@
+<table class="table table-striped table-bordered">
+    <tbody>
+    <tr ng-repeat="testCase in testCaseList | orderBy:'id':true">
+        <td>
+            <a href="">{{ testCase.name }}</a>
+            <ul step-list test-case-id="{{ testCase.id }}">
+                <li ng-repeat="step in stepList"><h4>{{ step.type }}</h4>{{ step.name }}</li>
+            </ul>
+        </td>
+        <td>
+            <span class="label label-{{ testCase.state | testState }}">{{ testCase.state || 'pending' }}</span>
+        </td>
+        <td>
+            <a href="" delete-test-case-dialog ng-click="deleteTestCase(testCase)">
+                <i class="glyphicon glyphicon-remove"></i>
+            </a>
+            <a href="" save-test-case-dialog ng-click="saveTestCase(testCase)">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+            <a href="" save-step-dialog ng-click="saveStep({test_case_id: testCase.id})">
+                <i class="glyphicon glyphicon-plus"></i>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
