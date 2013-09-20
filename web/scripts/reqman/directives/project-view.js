@@ -119,7 +119,7 @@ angular.module('reqmanApp')
               }
             }).then(function (item) {
               if (!item) {
-                return false;
+                return;
               }
               if (item.id) {
                 userStory.update(item).then(function () {
@@ -153,7 +153,7 @@ angular.module('reqmanApp')
               }
             }).then(function (item) {
               if (!item) {
-                return false;
+                return;
               }
               if (item.id) {
                 testCase.update(item).then(function () {
@@ -187,7 +187,7 @@ angular.module('reqmanApp')
               }
             }).then(function (item) {
               if (!item) {
-                return false;
+                return;
               }
               if (item.id) {
                 step.update(item).then(function () {
