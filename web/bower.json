@@ -2,11 +2,11 @@
   "name": "reqman",
   "version": "0.1.0",
   "dependencies": {
-    "angular": "~1.0.5",
+    "angular": "*",
     "angular-bootstrap": "*"
   },
   "devDependencies": {
-    "angular-mocks": "~1.0.5",
-    "angular-scenario": "~1.0.5"
+    "angular-mocks": "*",
+    "angular-scenario": "*"
   }
 }

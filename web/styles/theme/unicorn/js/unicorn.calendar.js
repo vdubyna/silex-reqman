@@ -1,6 +1,6 @@
 /**
  * Unicorn Admin Template
- * Version 2.0
+ * Version 2.1.0
  * Diablo9983 -> diablo9983@gmail.com
 **/
 

@@ -1,0 +1,26 @@
+<div>
+    <div class="modal-header">Save Project</div>
+    <div class="modal-body">
+        <form name="projectForm" class="form-horizontal">
+            <div class="form-group" ng-class="{error: projectForm.name.$invalid}">
+                <label class="control-label">Name</label>
+                <div class="controls">
+                    <input type="text" name="name" class="form-control" ng-model="project.name" required>
+                    <span for="name" ng-show="projectForm.name.$dirty && projectForm.name.$error.required" class="help-inline">Field is required</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Description</label>
+                <div class="controls">
+                    <textarea name="description" class="form-control" ng-model="project.description" />
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button class="btn" ng-click="cancel()">Cancel</button>
+        <button ng-click="save(project)" ng-disabled="projectForm.$invalid"
+                class="btn btn-primary">Save
+        </button>
+    </div>
+</div>

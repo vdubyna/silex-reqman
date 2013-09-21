@@ -106,10 +106,9 @@ angular.module('reqmanApp')
     return {
       restrict: "A",
       scope: true,
-      controller: function ($scope, $dialog) {
+      controller: function ($scope, $modal) {
         $scope.saveUserStory = function (currentUserStory) {
-          $dialog.dialog()
-            .open('scripts/reqman/views/directives/project-view/user-story-save.html', function ($scope, dialog) {
+          $modal.open('scripts/reqman/views/directives/project-view/user-story-save.html', function ($scope, dialog) {
               $scope.userStory = (currentUserStory) ? angular.copy(currentUserStory) : {};
               $scope.save = function (item) {
                 dialog.close(item);
@@ -140,10 +139,9 @@ angular.module('reqmanApp')
     return {
       restrict: "A",
       scope: true,
-      controller: function ($scope, $dialog) {
+      controller: function ($scope, $modal) {
         $scope.saveTestCase = function (currentTestCase) {
-          $dialog.dialog()
-            .open('scripts/reqman/views/directives/project-view/test-case-save.html', function ($scope, dialog) {
+          $modal.open('scripts/reqman/views/directives/project-view/test-case-save.html', function ($scope, dialog) {
               $scope.testCase = (currentTestCase) ? angular.copy(currentTestCase) : {};
               $scope.save = function (item) {
                 dialog.close(item);
@@ -174,10 +172,9 @@ angular.module('reqmanApp')
     return {
       restrict: "A",
       scope: true,
-      controller: function ($scope, $dialog) {
+      controller: function ($scope, $modal) {
         $scope.saveStep = function (currentStep) {
-          $dialog.dialog()
-            .open('scripts/reqman/views/directives/project-view/step-save.html', function ($scope, dialog) {
+          $modal.open('scripts/reqman/views/directives/project-view/step-save.html', function ($scope, dialog) {
               $scope.step = (currentStep) ? angular.copy(currentStep) : {};
               $scope.save = function (item) {
                 dialog.close(item);
@@ -208,10 +205,10 @@ angular.module('reqmanApp')
     return {
       restrict: "A",
       scope: true,
-      controller: function ($scope, $dialog) {
+      controller: function ($scope, $modal) {
         $scope.deleteUserStory = function (activeUserStory) {
 
-          $dialog.messageBox(
+          $modal.messageBox(
               "Delete User Story",
               "You will delete User Story: " + activeUserStory.name,
               [
@@ -237,9 +234,9 @@ angular.module('reqmanApp')
     return {
       restrict: "A",
       scope: true,
-      controller: function ($scope, $dialog) {
+      controller: function ($scope, $modal) {
         $scope.deleteTestCase = function (activeTestCase) {
-          $dialog.messageBox(
+          $modal.messageBox(
               "Delete User Story",
               "You will delete Test Case: " + activeTestCase.name,
               [
@@ -254,6 +251,39 @@ angular.module('reqmanApp')
                   .then(function (result) {
                     $rootScope.$broadcast("test_case_delete");
                   });
+              }
+            });
+        }
+      }
+    }
+  })
+
+  .directive('saveProjectDialog', function (project, $rootScope) {
+    return {
+      restrict: "A",
+      scope: true,
+      controller: function ($scope, $modal) {
+        $scope.saveProject = function (currentProject) {
+          $modal.open('scripts/reqman/views/directives/project-view/project-save.html', function ($scope, dialog) {
+              $scope.project = (currentProject) ? angular.copy(currentProject) : {};
+              $scope.save = function (item) {
+                dialog.close(item);
+              };
+              $scope.cancel = function () {
+                dialog.close();
+              }
+            }).then(function (item) {
+              if (!item) {
+                return;
+              }
+              if (item.id) {
+                project.update(item).then(function () {
+                  $rootScope.$broadcast("project_save");
+                });
+              } else {
+                project.save(item).then(function () {
+                  $rootScope.$broadcast("project_save");
+                });
               }
             });
         }
