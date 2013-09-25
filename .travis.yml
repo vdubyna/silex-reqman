@@ -8,6 +8,7 @@ env:
 
 before_install:
   - sudo apt-get install node
+  - cat /etc/init.d/xvfb
 before_script:
 # install apache and configure host
   - sudo apt-get update > /dev/null
